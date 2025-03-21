@@ -6,7 +6,7 @@ jobs:
   gradle-build:
     docker:
       - image: cimg/openjdk:17.0
-    working_directory: ~/  # CircleCI config 파일이 있는 루트 디렉토리로 설정
+    working_directory: ~/project    # CircleCI config 파일이 있는 루트 디렉토리로 설정
     steps:
       - checkout
       - run:
@@ -19,6 +19,17 @@ jobs:
           root: .  # workspace의 루트 경로
           paths:
             - demo/build/libs/*.jar  # 빌드된 JAR 파일 경로
+
+    docker-build-and-push:
+      docker:
+        - image: cimg/base:2022.09
+          auth:
+            username: $DOCKERHUB_USERNAME
+            password: $DOCKERHUB_PASSWORD
+        working_directory: ~/project
+        steps:
+          - attach_workspace:
+              at: ~/
 
 workflows:
   version: 2
