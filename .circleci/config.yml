@@ -2,9 +2,10 @@
 # Stacks detected: deps:java:demo,tool:gradle:
 version: 2.1
 
+version: 2.1
+
 jobs:
   gradle-build:
-    executor: docker  # 실행기 명시
     docker:
       - image: cimg/openjdk:17.0
     working_directory: ~/project
@@ -15,14 +16,15 @@ jobs:
           command: chmod +x gradlew
       - run:
           name: Gradle Build
-          command: ./demo/gradlew bootJar
+          command: ./gradlew bootJar
       - persist_to_workspace:
           root: .
           paths:
-            - demo/build/libs/*.jar
+            - build/libs/*.jar
+
 workflows:
-  version: 2
   build-and-deploy:
     jobs:
       - gradle-build
+
 
