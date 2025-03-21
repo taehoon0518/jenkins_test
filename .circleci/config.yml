@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: Add Permission
-          command: chmod +x gradlew
+          command: chmod +x demo/gradlew
       - run:
           name: Gradle Build
           command: ./demo/gradlew bootJar
