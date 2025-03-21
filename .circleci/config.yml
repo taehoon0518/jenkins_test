@@ -4,10 +4,9 @@ version: 2.1
 
 jobs:
   gradle-build:
-    executor:
-      name: docker
-      docker:
-        - image: cimg/openjdk:17.0
+    executor: docker  # 실행기 명시
+    docker:
+      - image: cimg/openjdk:17.0
     working_directory: ~/project
     steps:
       - checkout
