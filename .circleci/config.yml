@@ -6,22 +6,22 @@ jobs:
   gradle-build:
     docker:
       - image: cimg/openjdk:17.0
-    working_directory: ~/project
+    working_directory: ~/  # CircleCI config 파일이 있는 루트 디렉토리로 설정
     steps:
       - checkout
       - run:
           name: Add Permission
-          command: chmod +x demo/gradlew
+          command: chmod +x demo/gradlew  # demo 폴더 안의 gradlew에 실행 권한 부여
       - run:
           name: Gradle Build
-          command: ./demo/gradlew bootJar
+          command: demo/gradlew bootJar  # demo 폴더의 gradlew로 빌드 실행
       - persist_to_workspace:
-          root: .
+          root: .  # workspace의 루트 경로
           paths:
-            - demo/build/libs/*.jar
+            - demo/build/libs/*.jar  # 빌드된 JAR 파일 경로
+
 workflows:
   version: 2
   build-and-deploy:
     jobs:
       - gradle-build
-
