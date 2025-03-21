@@ -4,7 +4,6 @@ version: 2.1
 
 jobs:
   gradle-build:
-    executor: docker
     docker:
       - image: cimg/openjdk:17.0
     working_directory: ~/project
